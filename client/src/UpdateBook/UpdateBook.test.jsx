@@ -23,9 +23,19 @@ describe("UpdateBook", () => {
     expect(useFetchBook).toHaveBeenCalledWith("test-book-id");
   });
 
-  // describe("while loading", () => {
-  //   it("renders a loader", () => {});
-  // });
+  describe("while loading", () => {
+    it("renders a loader", () => {
+      useFetchBook.mockImplementation(() => ({
+        isLoading: true,
+      }));
+
+      const { getByTestId } = renderWithRouter(
+        () => <Route path=":id" element={<UpdateBook />} />,
+        "/test-book-id"
+      );
+      expect(getByTestId("loader")).toBeTruthy();
+    });
+  });
 
   // describe("with an error", () => {
   //   it("renders an error message", () => {});

@@ -19,7 +19,7 @@ export const UpdateBook = () => {
   if (isLoading) {
     return (
       <Container>
-        <Flex py="5" justifyContent="center">
+        <Flex data-testid="loader" py="5" justifyContent="center">
           <ThreeDots type="ThreeDots" color="#cccccc" height={30} />
         </Flex>
       </Container>
