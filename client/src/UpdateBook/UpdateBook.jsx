@@ -1,18 +1,15 @@
 import { ThreeDots } from "react-loader-spinner";
-import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Flex, Heading } from "rebass/styled-components";
-import { getBook, updateBook } from "../api";
+import { useFetchBook } from "../hooks/useFetchBook";
+import { useUpdateBook } from "../hooks/useUpdateBook";
 import { BookForm, Container } from "../shared";
 
 export const UpdateBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data, error, isLoading, isError } = useQuery(
-    ["book", { id }],
-    getBook
-  );
-  const { mutateAsync, isLoading: isMutating } = useMutation(updateBook);
+  const { data, error, isLoading, isError } = useFetchBook(id);
+  const { mutateAsync, isLoading: isMutating } = useUpdateBook();
 
   const onFormSubmit = async (formData) => {
     await mutateAsync({ ...formData, id });
