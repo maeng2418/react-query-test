@@ -1,14 +1,13 @@
+import preset from "@rebass/preset";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "styled-components"
-import preset from '@rebass/preset'
+import { ThemeProvider } from "styled-components";
+import App from "./App";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +17,7 @@ ReactDOM.render(
       <ThemeProvider theme={preset}>
         <BrowserRouter>
           <App />
-          <ReactQueryDevtools  position="bottom-right" />
+          <ReactQueryDevtools position="bottom-right" />
         </BrowserRouter>
       </ThemeProvider>
     </QueryClientProvider>

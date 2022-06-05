@@ -1,9 +1,9 @@
-import { Flex } from "rebass/styled-components";
-import { Container } from "../shared";
+import { ThreeDots } from "react-loader-spinner";
 import { useQuery } from "react-query";
+import { Flex } from "rebass/styled-components";
 import { getAllBooks } from "../api";
+import { Container } from "../shared";
 import { BookItem } from "./BookItem";
-import Loader from "react-loader-spinner";
 
 export const BooksList = () => {
   const { data, error, isLoading, isError } = useQuery("books", getAllBooks);
@@ -12,7 +12,7 @@ export const BooksList = () => {
     return (
       <Container>
         <Flex py="5" justifyContent="center">
-          <Loader type="ThreeDots" color="#cccccc" height={30} />
+          <ThreeDots type="ThreeDots" color="#cccccc" height={30} />
         </Flex>
       </Container>
     );

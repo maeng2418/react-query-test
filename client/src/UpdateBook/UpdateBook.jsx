@@ -1,26 +1,29 @@
-import { BookForm, Container } from "../shared";
-import { useQuery, useMutation } from "react-query";
-import { Box, Heading, Flex } from "rebass/styled-components";
+import { ThreeDots } from "react-loader-spinner";
+import { useMutation, useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { Box, Flex, Heading } from "rebass/styled-components";
 import { getBook, updateBook } from "../api";
-import { useParams, useHistory } from "react-router-dom"
-import Loader from "react-loader-spinner"
+import { BookForm, Container } from "../shared";
 
 export const UpdateBook = () => {
-  const { id } = useParams()
-  const history = useHistory()
-  const { data, error, isLoading, isError } = useQuery(["book", { id }], getBook);
-  const { mutateAsync, isLoading: isMutating } = useMutation(updateBook)
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data, error, isLoading, isError } = useQuery(
+    ["book", { id }],
+    getBook
+  );
+  const { mutateAsync, isLoading: isMutating } = useMutation(updateBook);
 
   const onFormSubmit = async (formData) => {
-    await mutateAsync({...formData, id})
-    history.push("/")
-  }
+    await mutateAsync({ ...formData, id });
+    navigate("/");
+  };
 
   if (isLoading) {
     return (
       <Container>
         <Flex py="5" justifyContent="center">
-          <Loader type="ThreeDots" color="#cccccc" height={30} />
+          <ThreeDots type="ThreeDots" color="#cccccc" height={30} />
         </Flex>
       </Container>
     );
@@ -44,7 +47,11 @@ export const UpdateBook = () => {
         }}
       >
         <Heading sx={{ marginBottom: 3 }}>Update Book</Heading>
-        <BookForm defaultValues={data} onFormSubmit={onFormSubmit} isLoading={isMutating}/>
+        <BookForm
+          defaultValues={data}
+          onFormSubmit={onFormSubmit}
+          isLoading={isMutating}
+        />
       </Box>
     </Container>
   );
