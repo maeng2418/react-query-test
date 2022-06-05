@@ -4,14 +4,25 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import { MemoryRouter, Routes } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import {
+  Routes,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom";
 
 global.renderWithRouter = (renderComponent, route) => {
+  const history = createMemoryHistory();
+
+  if (route) {
+    history.push(route);
+  }
+
   return {
     ...render(
-      <MemoryRouter initialEntries={[route]}>
+      <HistoryRouter history={history}>
         <Routes>{renderComponent()}</Routes>
-      </MemoryRouter>
+      </HistoryRouter>
     ),
+    history,
   };
 };

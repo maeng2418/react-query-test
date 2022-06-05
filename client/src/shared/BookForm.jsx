@@ -20,7 +20,7 @@ export const BookForm = ({ defaultValues, onFormSubmit, isLoading }) => {
         <Label htmlFor="author">Author</Label>
         <Input id="author" name="author" type="text" {...register("author")} />
       </Box>
-      <Button variant="primary" mr={2}>
+      <Button variant="primary" mr={2} type="submit">
         {isLoading ? (
           <ThreeDots type="ThreeDots" color="#fff" height={10} />
         ) : (
