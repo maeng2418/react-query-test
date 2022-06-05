@@ -37,9 +37,20 @@ describe("UpdateBook", () => {
     });
   });
 
-  // describe("with an error", () => {
-  //   it("renders an error message", () => {});
-  // });
+  describe("with an error", () => {
+    it("renders an error message", () => {
+      useFetchBook.mockImplementation(() => ({
+        isError: true,
+        error: { message: "Something went wrong" },
+      }));
+
+      const { container } = renderWithRouter(
+        () => <Route path=":id" element={<UpdateBook />} />,
+        "/test-book-id"
+      );
+      expect(container.innerHTML).toMatch("Error: Something went wrong");
+    });
+  });
 
   // describe("with data", () => {
   //   it("renders the update book title and the book form", () => {});
